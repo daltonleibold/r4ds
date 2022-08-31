@@ -35,6 +35,7 @@ tidydata <- data %>%
 ```
 
 ```{r}
+# make a file to add to gitignore
 hist(data$sl)
 ```
 
