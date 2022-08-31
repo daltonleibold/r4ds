@@ -1,0 +1,44 @@
+---
+title: "Workshop 6 - GitHub"
+author: "Dalton C. Leibold"
+date: "31/08/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+pacman::p_load(tidyverse, here)
+```
+
+```{r}
+data <- read_csv(here("GitHub_Workshop_Mats", "OA_activitydat_20190302_BIOL3207.csv"))
+
+glimpse(data)
+# check for spelling errors by looking at unique values within columns
+unique(data$species)
+unique(data$treatment)
+
+tidydata <- data %>%
+  # select out useless columns
+  select(-c(1, loc, comment)) %>%
+  # remove all rows containing at least one missing value
+  na.omit() %>%
+  group_by(treatment, species) %>%
+  summarise(act_mean = mean(activity),
+            act_sd = sd(activity),
+            sl_mean = mean(sl),
+            sl_sd = sd(sl),
+            samples = n())
+```
+
+```{r}
+hist(data$sl)
+```
+
+
+
+
+
